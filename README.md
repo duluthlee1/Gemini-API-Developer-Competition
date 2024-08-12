@@ -7,8 +7,7 @@ To automate and enhance this process, we have developed a web-based application 
 This innovation is particularly beneficial for research teams working on nano devices and novel semiconductor materials, offering them a convenient, efficient, and automated solution for quality assessment during the semiconductor fabrication process.
 
 
-# You can download the model weights from this link: Model Weights Download Link.https://drive.google.com/file/d/1-1pCXq6E3t56JPqT0E_FVxXX76ctGWzw/view?usp=sharing
-
+You can download the model weights from this link: Model Weights Download Link.https://drive.google.com/file/d/1Iw54O18OYL361dEO2byJRnI2C1EpPR3n/view?usp=sharing
 # How to Use the Web Application
 # Upload Images:
 
