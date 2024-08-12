@@ -10,7 +10,7 @@ import json
 import re
 
 # 配置Google API Key
-api_key = 'your api key'  # 替换成你的API Key
+api_key = 'your_api_key'  # 替换成你的API Key
 genai.configure(api_key=api_key)
 
 # 加载分割模型
@@ -86,8 +86,7 @@ def select_regions(segmented_image, original_size):
 
     return single_line_regions, multi_line_regions
 
-
-# 从原始图像中计算每个纳米带的强度
+# 从原始图像中计算每个nanoribbon的强度
 def calculate_intensity_from_original_image(original_image, regions):
     original_image = original_image.convert("L")  # 将图像转换为灰度模式
     np_image = np.array(original_image)
@@ -102,26 +101,26 @@ def calculate_intensity_from_original_image(original_image, regions):
 # 使用Google Generative AI分析线条信息
 def analyze_lines_with_gemini(lines_info):
     prompt = f"""
-    Please analyze the following nanobelts and provide a detailed, but concise report. The report should be structured, human-readable, and easy to understand. Include clear labeling on the annotated image, identifying the measurements and the best nanobelt.
+    Please analyze the following nanoribbons and provide a detailed, but concise report. The report should be structured, human-readable, and easy to understand. Include clear labeling on the annotated image, identifying the measurements and the best nanoribbon.
 
     Report Structure:
     1. **Introduction**: Briefly explain the objective of the analysis.
-    2. **Nanobelt Analysis**:
-        - Identify and label each nanobelt as Line 1, Line 2, etc.
-        - For each nanobelt, provide:
+    2. **Nanoribbon Analysis**:
+        - Identify and label each nanoribbon as Line 1, Line 2, etc.
+        - For each nanoribbon, provide:
             - Length in nanometers (nm)
             - Width in nanometers (nm)
             - Mean intensity
     3. **Comparison**:
-        - Compare the nanobelts based on the provided metrics.
-        - Identify the nanobelt with the smallest width, longest length, and weakest mean intensity.
+        - Compare the nanoribbons based on the provided metrics.
+        - Identify the nanoribbon with the smallest width, longest length, and weakest mean intensity.
     4. **Conclusion**:
-        - Highlight the best nanobelt based on the above criteria.
-        - Provide a brief explanation as to why this nanobelt is the best choice, considering its length, width, and mean intensity.
+        - Highlight the best nanoribbon based on the above criteria.
+        - Provide a brief explanation as to why this nanoribbon is the best choice, considering its length, width, and mean intensity.
 
     Please ensure the report is clear, concise, and avoids unnecessary technical jargon, making it accessible to a general audience.
 
-    Here is the data for the nanobelts:
+    Here is the data for the nanoribbons:
     {json.dumps(lines_info, indent=4)}
 
     Provide the report in a clear and logical format.
@@ -155,7 +154,7 @@ def segment_and_analyze(image, model, pixel_to_micron_ratio):
     if not single_line_regions:
         return image, Image.fromarray(segmented_image), "No single-line segments found", "No analysis performed", []
 
-    # 在原始图像上计算每个纳米带的强度
+    # 在原始图像上计算每个nanoribbon的强度
     single_line_regions = calculate_intensity_from_original_image(image, single_line_regions)
     multi_line_regions = calculate_intensity_from_original_image(image, multi_line_regions)
 
@@ -252,7 +251,7 @@ iface = gr.Interface(
         gr.Gallery(label="Segmented Images"),  # 显示多个分割图像
         gr.Textbox(label="Results", lines=5),  # 显示结果
         gr.Textbox(label="Analysis", lines=10),  # 显示分析
-        gr.Textbox(label="Line Descriptions", lines=15)  # 显示纳米带描述
+        gr.Textbox(label="Line Descriptions", lines=15)  # 显示nanoribbon描述
     ],
     title="Automated Image-Based Measurement Tool for Nano Devices",
     description="Upload multiple images and select the appropriate scale type (5 um or 10 um) to segment and analyze using Gemini API."
